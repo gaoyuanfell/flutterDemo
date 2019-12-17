@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'layout-first.dart';
+import 'layout-api.dart';
+import 'layout-demo.dart';
 import 'random-words.dart';
 
 void main() {
   debugPaintSizeEnabled = true; // 展示所有盒子范围
-  // debugPaintPointersEnabled = true; // 展示可点击区域范围
+  debugPaintPointersEnabled = true; // 展示可点击区域范围
   // debugPaintLayerBordersEnabled = true; // 所有layer展示橙色边框
   // debugRepaintRainbowEnabled = true; // 炫彩边框效果
   return runApp(App());
@@ -50,18 +51,34 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           print('布局');
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return LayoutFirst();
+            return LayoutApi();
           }));
         },
       ),
       RaisedButton(
         child: Text(
-          '添加交互',
+          '布局Demo',
           style: TextStyle(color: const Color(0xFFFFFFFF)),
         ),
         color: Colors.lightBlue,
         onPressed: () {
-          print('添加交互');
+          print('布局Demo');
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return LayoutDemo();
+          }));
+        },
+      ),
+      RaisedButton(
+        child: Text(
+          '表单',
+          style: TextStyle(color: const Color(0xFFFFFFFF)),
+        ),
+        color: Colors.lightBlue,
+        onPressed: () {
+          print('表单');
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return LayoutDemo();
+          }));
         },
       ),
     ];
@@ -70,10 +87,12 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('导航'),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        mainAxisSize: MainAxisSize.max,
-        children: buttonList,
+      body: Container(
+        width: double.infinity,
+        child: Wrap(
+          alignment: WrapAlignment.spaceAround,
+          children: buttonList,
+        ),
       ),
     );
   }
