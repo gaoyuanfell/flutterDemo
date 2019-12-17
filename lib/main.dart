@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'layout-first.dart';
 import 'random-words.dart';
 
 void main() {
@@ -27,6 +28,44 @@ class App extends StatelessWidget {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final buttonList = <Widget>[
+      RaisedButton(
+        child: Text(
+          '无限滚动',
+          style: TextStyle(color: const Color(0xFFFFFFFF)),
+        ),
+        color: Colors.lightBlue,
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return RandomWords();
+          }));
+        },
+      ),
+      RaisedButton(
+        child: Text(
+          '布局',
+          style: TextStyle(color: const Color(0xFFFFFFFF)),
+        ),
+        color: Colors.lightBlue,
+        onPressed: () {
+          print('布局');
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return LayoutFirst();
+          }));
+        },
+      ),
+      RaisedButton(
+        child: Text(
+          '添加交互',
+          style: TextStyle(color: const Color(0xFFFFFFFF)),
+        ),
+        color: Colors.lightBlue,
+        onPressed: () {
+          print('添加交互');
+        },
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('导航'),
@@ -34,45 +73,7 @@ class HomePage extends StatelessWidget {
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          RaisedButton(
-            child: Text(
-              '导航到新页面',
-              style: TextStyle(color: const Color(0xFFFFFFFF)),
-            ),
-            color: Colors.lightBlue,
-            onPressed: () {
-              print('导航到新页面');
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context){
-                    return RandomWords();
-                  }
-                )
-              );
-            },
-          ),
-          RaisedButton(
-            child: Text(
-              '无限滚动',
-              style: TextStyle(color: const Color(0xFFFFFFFF)),
-            ),
-            color: Colors.lightBlue,
-            onPressed: () {
-              print('无限滚动');
-            },
-          ),
-          RaisedButton(
-            child: Text(
-              '添加交互',
-              style: TextStyle(color: const Color(0xFFFFFFFF)),
-            ),
-            color: Colors.lightBlue,
-            onPressed: () {
-              print('添加交互');
-            },
-          ),
-        ],
+        children: buttonList,
       ),
     );
   }
