@@ -3,11 +3,12 @@ import 'package:flutter/rendering.dart';
 
 import 'layout-api.dart';
 import 'layout-demo.dart';
+import 'material-demo.dart';
 import 'random-words.dart';
 
 void main() {
-  debugPaintSizeEnabled = true; // 展示所有盒子范围
-  debugPaintPointersEnabled = true; // 展示可点击区域范围
+  // debugPaintSizeEnabled = true; // 展示所有盒子范围
+  // debugPaintPointersEnabled = true; // 展示可点击区域范围
   // debugPaintLayerBordersEnabled = true; // 所有layer展示橙色边框
   // debugRepaintRainbowEnabled = true; // 炫彩边框效果
   return runApp(App());
@@ -78,6 +79,20 @@ class HomePage extends StatelessWidget {
           print('表单');
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
             return LayoutDemo();
+          }));
+        },
+      ),
+      RaisedButton(
+        child: Text(
+          'App结构',
+          style: TextStyle(color: const Color(0xFFFFFFFF)),
+        ),
+        color: Colors.lightBlue,
+        onPressed: () {
+          print('App结构');
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            // 测试路由传参和出参
+            return MaterialDemo(id: 1, title: '测试');
           }));
         },
       ),
