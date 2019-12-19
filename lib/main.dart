@@ -17,11 +17,15 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          textTheme: theme.textTheme.copyWith(
+            body2: theme.textTheme.body2.copyWith(color: Colors.black),
+          )),
       home: HomePage(),
     );
   }
@@ -98,6 +102,12 @@ class HomePage extends StatelessWidget {
       ),
     ];
 
+    final Widget _floatingActionButton = FloatingActionButton.extended(
+      onPressed: () {},
+      icon: Icon(Icons.add),
+      label: Text('Add'),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text('导航'),
@@ -109,6 +119,41 @@ class HomePage extends StatelessWidget {
           children: buttonList,
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.blue,
+        shape: CircularNotchedRectangle(),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: 0,
+      //   items: [
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+      //   ],
+      // ),
     );
   }
 }
