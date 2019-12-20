@@ -9,7 +9,7 @@ import 'material-demo.dart';
 import 'random-words.dart';
 
 void main() {
-  // debugPaintSizeEnabled = true; // 展示所有盒子范围
+  debugPaintSizeEnabled = true; // 展示所有盒子范围
   // debugPaintPointersEnabled = true; // 展示可点击区域范围
   // debugPaintLayerBordersEnabled = true; // 所有layer展示橙色边框
   // debugRepaintRainbowEnabled = true; // 炫彩边框效果
