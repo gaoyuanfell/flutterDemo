@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class HomeBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //获取设备信息
     var boxWidth = MediaQuery.of(context).size.width / 4;
     return Container(
       width: double.infinity,

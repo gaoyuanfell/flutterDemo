@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'drawerDemo.dart';
 import 'navigationBar/home-bar.dart';
 import 'navigationBar/business-bar.dart';
 import 'navigationBar/image-bar.dart';
@@ -21,8 +22,8 @@ class _MaterialDemoState extends State<MaterialDemo> {
   List _pages = [
     HomeBar(),
     BusinessBar(),
-    ImageBar(),
     SchoolBar(),
+    ImageBar(),
   ];
 
   @override
@@ -34,16 +35,16 @@ class _MaterialDemoState extends State<MaterialDemo> {
         Icon(Icons.home),
         Positioned(
           child: Container(
-            child: Center(child: Text('2', style: TextStyle(fontSize: 10, color: Colors.white))),
+            child: Center(
+                child: Text('99',
+                    style: TextStyle(fontSize: 10, color: Colors.white))),
             decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(15)
-            ),
-            width: 15,
-            height: 15,
+                color: Colors.red, borderRadius: BorderRadius.circular(9)),
+            width: 18,
+            height: 18,
           ),
           top: -5,
-          right: -25,
+          right: -5,
         )
       ],
     );
@@ -53,18 +54,47 @@ class _MaterialDemoState extends State<MaterialDemo> {
         title: Text('MaterialDemo'),
         centerTitle: true,
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.close), onPressed: () {
-            Navigator.of(context).pop();
-          })
+          IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
+          PopupMenuButton(
+            offset: Offset(10, 10),
+            onSelected: (int index) {
+              print(index);
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<int>(
+                  value: 1,
+                  child: Text('1'),
+                ),
+                PopupMenuItem<int>(
+                  value: 2,
+                  child: Text('2'),
+                ),
+                PopupMenuItem<int>(
+                  value: 3,
+                  child: Text('3'),
+                ),
+                PopupMenuItem<int>(
+                  value: 4,
+                  child: Text('4'),
+                ),
+              ];
+            },
+          )
         ],
       ),
-      drawer: Drawer(child: Text('data')),
+      drawer: DrawerDemo(),
+      drawerEdgeDragWidth: 30,
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: _qipao ,
+            icon: _qipao,
             title: Text('Home'),
           ),
           BottomNavigationBarItem(

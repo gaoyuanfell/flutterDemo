@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'formDemo.dart';
 import 'layout-api.dart';
 import 'layout-demo.dart';
 import 'material-demo.dart';
@@ -27,6 +29,14 @@ class App extends StatelessWidget {
             body2: theme.textTheme.body2.copyWith(color: Colors.black),
           )),
       home: HomePage(),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('zh', 'CH'),
+        const Locale('en', 'US'),
+      ],
     );
   }
 }
@@ -82,7 +92,7 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           print('表单');
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return LayoutDemo();
+            return FormDemo();
           }));
         },
       ),
@@ -131,6 +141,10 @@ class HomePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
+            ),
             IconButton(
               icon: Icon(Icons.home),
               onPressed: () {},
