@@ -88,7 +88,8 @@ class _TabBarViewBState extends State<TabBarViewB> {
         itemCount: _data.length,
         itemBuilder: (context, index) {
           final item = _data[index];
-          Future future = new Future(() => null);
+
+          Future future = Future.sync(() => null);
 
           // Future.delayed()
 
@@ -111,9 +112,7 @@ class _TabBarViewBState extends State<TabBarViewB> {
                   FlatButton(
                     child: Text('NO'),
                     onPressed: () {
-                      future.then((val){
-
-                      });
+                      
                     },
                   ),
                   FlatButton(
