@@ -57,7 +57,7 @@ class HomeBar extends StatelessWidget {
             child: TabBarView(
               children: <Widget>[
                 TabBarViewA(),
-                Text('22'),
+                TabBarViewB(),
                 Text('33'),
                 Text('44'),
               ],
@@ -69,12 +69,76 @@ class HomeBar extends StatelessWidget {
   }
 }
 
-class TabBarViewA extends StatefulWidget {
+class TabBarViewB extends StatefulWidget {
   @override
-  TabBarViewAState createState() => TabBarViewAState();
+  _TabBarViewBState createState() => _TabBarViewBState();
 }
 
-class TabBarViewAState extends State<TabBarViewA> {
+class _TabBarViewBState extends State<TabBarViewB> {
+  List<String> _data = List.generate(100, (index) {
+    return "Item ${index + 1}";
+  });
+
+ //TODU
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      child: ListView.builder(
+        itemCount: _data.length,
+        itemBuilder: (context, index) {
+          final item = _data[index];
+          Future future = new Future(() => null);
+
+          // Future.delayed()
+
+          return Dismissible(
+            key: Key(item),
+            onDismissed: (direction) {
+              _data.removeAt(index);
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("$item dismissed"),
+                ),
+              );
+            },
+            confirmDismiss: (direction) {
+              return future;
+            },
+            background: Container(
+              child: Row(
+                children: <Widget>[
+                  FlatButton(
+                    child: Text('NO'),
+                    onPressed: () {
+                      future.then((val){
+
+                      });
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('YES'),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+            child: ListTile(
+              title: Text('$item'),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class TabBarViewA extends StatefulWidget {
+  @override
+  _TabBarViewAState createState() => _TabBarViewAState();
+}
+
+class _TabBarViewAState extends State<TabBarViewA> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -101,11 +165,13 @@ class TabBarViewAState extends State<TabBarViewA> {
           ),
           Container(
             width: double.infinity,
-            height: 200,
+            height: 100,
             child: GridView.count(
               // Create a grid with 2 columns. If you change the scrollDirection to
               // horizontal, this would produce 2 rows.
               crossAxisCount: 3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
               // Generate 100 Widgets that display their index in the List
               children: List.generate(100, (index) {
                 return Center(
@@ -114,6 +180,18 @@ class TabBarViewAState extends State<TabBarViewA> {
                   ),
                 );
               }),
+            ),
+          ),
+          InkWell(
+            // When the user taps the button, show a snackbar
+            onTap: () {
+              // Scaffold.of(context).showSnackBar(new SnackBar(
+              //   content: new Text('Tap'),
+              // ));
+            },
+            child: new Container(
+              padding: new EdgeInsets.all(12.0),
+              child: new Text('Flat Button'),
             ),
           )
         ],
