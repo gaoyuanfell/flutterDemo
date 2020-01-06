@@ -5,14 +5,15 @@ class BusinessBar extends StatefulWidget {
   _BusinessBarState createState() => _BusinessBarState();
 }
 
-class _BusinessBarState extends State<BusinessBar> with SingleTickerProviderStateMixin {
+class _BusinessBarState extends State<BusinessBar>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 4);
-    _tabController.addListener((){
+    _tabController.addListener(() {
       print('ok');
     });
   }
@@ -103,14 +104,93 @@ class _BusinessBarState extends State<BusinessBar> with SingleTickerProviderStat
           child: TabBarView(
             controller: _tabController,
             children: <Widget>[
-              Text('11'),
-              Text('22'),
-              Text('33'),
-              Text('44'),
+              TabBarViewA(),
+              TabBarViewB(),
+              TabBarViewC(),
+              TabBarViewD(),
             ],
           ),
         )
       ],
     );
+  }
+}
+
+class TabBarViewA extends StatefulWidget {
+  @override
+  _TabBarViewAState createState() => _TabBarViewAState();
+}
+
+class _TabBarViewAState extends State<TabBarViewA> {
+  //生成widget列表
+  List<Widget> _buildGridChildren() {
+    final List list = List<Widget>();
+    for (int x = 0; x < 12; x++) {
+      list.add(Card(
+        child: Center(
+          child: Text('x = $x'),
+        ),
+      ));
+    }
+    return list;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        Text('123123'),
+        Container(
+          height: 300,
+          child: GridView.count(
+            childAspectRatio: 3.0,
+            crossAxisCount: 3,
+            children: _buildGridChildren(),
+          ),
+        ),
+        // GridView.count(
+        //   childAspectRatio: 3.0,
+        //   // scrollDirection: Axis.vertical,
+        //   crossAxisCount: 3,
+        //   children: _buildGridChildren(),
+        // )
+      ],
+    );
+  }
+}
+
+class TabBarViewB extends StatefulWidget {
+  @override
+  _TabBarViewBState createState() => _TabBarViewBState();
+}
+
+class _TabBarViewBState extends State<TabBarViewB> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class TabBarViewC extends StatefulWidget {
+  @override
+  _TabBarViewCState createState() => _TabBarViewCState();
+}
+
+class _TabBarViewCState extends State<TabBarViewC> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class TabBarViewD extends StatefulWidget {
+  @override
+  _TabBarViewDState createState() => _TabBarViewDState();
+}
+
+class _TabBarViewDState extends State<TabBarViewD> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

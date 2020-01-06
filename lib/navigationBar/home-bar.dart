@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class HomeBar extends StatelessWidget {
@@ -58,12 +60,58 @@ class HomeBar extends StatelessWidget {
               children: <Widget>[
                 TabBarViewA(),
                 TabBarViewB(),
-                Text('33'),
-                Text('44'),
+                TabBarViewC(),
+                TabBarViewD(),
               ],
             ),
           )
         ]),
+      ),
+    );
+  }
+}
+
+class TabBarViewD extends StatefulWidget {
+  @override
+  _TabBarViewDState createState() => _TabBarViewDState();
+}
+
+class _TabBarViewDState extends State<TabBarViewD> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(30),
+      child: Offstage(
+        offstage: false,
+        child: Container(
+          width: 100,
+          height: 100,
+          color: Colors.red,
+        ),
+      ),
+    );
+  }
+}
+
+class TabBarViewC extends StatefulWidget {
+  @override
+  _TabBarViewCState createState() => _TabBarViewCState();
+}
+
+class _TabBarViewCState extends State<TabBarViewC> {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      color: Colors.amberAccent,
+      width: 100,
+      height: 100,
+      child: FittedBox(
+        fit: BoxFit.fill,
+        alignment: Alignment.topLeft,
+        child: Container(
+          color: Colors.red,
+          child: Text("FittedBox"),
+        ),
       ),
     );
   }
@@ -79,7 +127,7 @@ class _TabBarViewBState extends State<TabBarViewB> {
     return "Item ${index + 1}";
   });
 
- //TODU
+  //TODU
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -89,9 +137,7 @@ class _TabBarViewBState extends State<TabBarViewB> {
         itemBuilder: (context, index) {
           final item = _data[index];
 
-          Future future = Future.sync(() => null);
-
-          // Future.delayed()
+          Completer<bool> _completer;
 
           return Dismissible(
             key: Key(item),
@@ -103,21 +149,47 @@ class _TabBarViewBState extends State<TabBarViewB> {
                 ),
               );
             },
+            onResize: () {
+              print('onResize');
+            },
             confirmDismiss: (direction) {
-              return future;
+              _completer = Completer();
+              return _completer.future;
             },
             background: Container(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   FlatButton(
                     child: Text('NO'),
                     onPressed: () {
-                      
+                      _completer.complete(false);
                     },
                   ),
                   FlatButton(
                     child: Text('YES'),
-                    onPressed: () {},
+                    onPressed: () {
+                      _completer.complete(true);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            secondaryBackground: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  FlatButton(
+                    child: Text('NO'),
+                    onPressed: () {
+                      _completer.complete(false);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('YES'),
+                    onPressed: () {
+                      _completer.complete(true);
+                    },
                   ),
                 ],
               ),
@@ -187,6 +259,7 @@ class _TabBarViewAState extends State<TabBarViewA> {
               // Scaffold.of(context).showSnackBar(new SnackBar(
               //   content: new Text('Tap'),
               // ));
+              Scaffold.of(context).openDrawer();
             },
             child: new Container(
               padding: new EdgeInsets.all(12.0),

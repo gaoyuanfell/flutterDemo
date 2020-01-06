@@ -5,6 +5,57 @@ class LayoutApi extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = <Widget>[
       ListTile(
+        title: Text('RichText'),
+      ),
+      ListTile(
+        title: Text('ListBody'),
+      ),
+      ListBody(
+        mainAxis: Axis.vertical,
+        reverse: true,
+        children: <Widget>[
+          Container(
+            color: Colors.red,
+            width: 10.0,
+            height: 50.0,
+          ),
+          Container(
+            color: Colors.yellow,
+            width: 10.0,
+            height: 50.0,
+          ),
+          Container(
+            color: Colors.green,
+            width: 10.0,
+            height: 50.0,
+          ),
+          Container(
+            color: Colors.blue,
+            width: 10.0,
+            height: 50.0,
+          ),
+          Container(
+            color: Colors.black,
+            width: 10.0,
+            height: 50.0,
+          ),
+        ],
+      ),
+      ListTile(
+        title: Text('IndexedStack'),
+      ),
+      Container(
+        child: IndexedStack(
+          index: 0,
+          children: <Widget>[
+            Text('1'),
+            Text('2'),
+            Text('3'),
+            Text('4'),
+          ],
+        ),
+      ),
+      ListTile(
         title: Text('Align'),
       ),
       Container(
@@ -121,6 +172,16 @@ class LayoutApi extends StatelessWidget {
             avatar:
                 CircleAvatar(backgroundColor: Colors.blue, child: Text('H')),
             label: Text('Mulligan'),
+          ),
+          Chip(
+            avatar:
+                CircleAvatar(backgroundColor: Colors.blue, child: Text('J')),
+            label: Text('Laurens'),
+          ),
+          Chip(
+            avatar:
+                CircleAvatar(backgroundColor: Colors.blue, child: Text('J')),
+            label: Text('Laurens'),
           ),
           Chip(
             avatar:

@@ -49,10 +49,20 @@ class _MaterialDemoState extends State<MaterialDemo> {
       ],
     );
 
+    GlobalKey<ScaffoldState> _scaffoldStateGlobalKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: _scaffoldStateGlobalKey,
       appBar: AppBar(
         title: Text('MaterialDemo'),
         centerTitle: true,
+        leading: IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              // Navigator.of(context).pop();
+              _scaffoldStateGlobalKey.currentState.openDrawer();
+              // print(_key.currentState.openDrawer());
+            }),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.close),
